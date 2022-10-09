@@ -1,0 +1,151 @@
+#Worksheet1.R
+
+
+#JR G. Delgado 
+#BSIT 2A
+#1. Set up a vector named age, consisting of...
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27,
+         22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 42, 53,
+         41,51, 35, 24, 33, 41)
+age      #a. 34 data 
+
+
+#2. Find reciprocal
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27,
+         22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 42, 53,
+         41,51, 35, 24, 33, 41)
+reciprocal <- 1/age
+reciprocal
+
+#3. Assign also new_age <- c(age, 0, age)
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27,
+         22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 42, 53,
+         41,51, 35, 24, 33, 41)
+new_age <- c(age, 0, age)
+new_age
+
+#4. Sort the values for age.
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27,
+         22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 42, 53,
+         41,51, 35, 24, 33, 41)
+sort(age)
+
+#5. Find the minimum and maximum value for age.
+age <- c(34, 28, 22, 36, 27, 18, 52, 39, 42, 29, 35, 31, 27,
+         22, 37, 34, 19, 20, 57, 49, 50, 37, 46, 25, 17, 37, 42, 53,
+         41,51, 35, 24, 33, 41)
+max(age)
+min(age)
+
+#6. Set up a vector named data
+data <- c(2.4, 2.8, 2.1, 2.5, 2.4, 2.2, 2.5, 2.3,
+          2.5, 2.3, 2.4, 2.7)
+#a. 12 data points
+data  
+
+#7. Generates a new vector for data where you 
+#double every value of the data.
+data <- c(2.4, 2.8, 2.1, 2.5, 2.4, 2.2, 2.5, 2.3,
+          2.5, 2.3, 2.4, 2.7)
+data*2      #Answer: the value of your vector was been double also
+
+
+#8. Generate a sequence for the following scenario
+#8.1 Integers from 1 to 100.
+seq(1:100)
+
+#8.2 Numbers from 20 to 60
+num <- 20:60
+num
+
+#8.3 Mean of numbers from 20 to 60
+num <- 20:60
+num
+mean(num)
+
+#8.4 Sum of numbers from 51 to 91
+num <- 51:91
+sum(num)
+
+#8.5 Integers from 1 to 1,000 
+num <- 1:1000
+class(num)
+#a. How many data points from 8.1 to 8.4?
+# 8.1 = 100
+#8.2 = 41
+#8.3 = 41
+#8.4 = 41
+#total: 163 data points
+#b. Write the R code and its output from 8.1 to 8.4.
+
+#8.1
+seq(1:100)
+
+#8.2
+num <- 20:60
+num 
+
+#8.3
+num <- 20:60
+num
+mean(num)
+
+#8.4
+num <- 51:91
+sum(num)
+
+#c. For 8.5 find only maximum data points until 10
+seq(1,1000, by = 100)
+
+#9.*Print a vector with the integers between 1 and 100 that 
+#are not divisible by 3, 5 and 7
+#using filter option
+
+Filter(function(i) { all(i %% c(3,5,7) != 0) }, seq(100))
+
+#10. Generate a sequence backwards of the integers from 1 to 100
+num <- 100:1
+num
+
+#11. 11.	List all the natural numbers below 25 that are multiples of 3 or 5.
+#Find the sum of these multiples.
+multiple_by3 <- c(3,6,9,12,15,18,21,24)
+multiple_by5 <- c(5,10,15,20)
+sum(multiple_by3)
+sum(multiple_by5)
+sum(multiple_by3, multiple_by5)
+
+#a. num = 100
+#multiple_by3 = 8
+#multiple_by5 = 4
+#total: 112 data points
+#b.	Write the R code and its output from 10 and 11.
+
+#10
+num <- 100:1
+num 
+
+#11
+multiple_by3 <- c(3,6,9,12,15,18,24)
+multiple_by5 <- c(5,10,15,20)
+sum(multiple_by3)
+sum(multiple_by5)
+
+#12. the output is error
+{ x <- 0+ x + 5 + }
+
+#13. 
+score <- c(72,86,92,63,88,89,91,92,75,75,77)
+score[2]
+score[3]
+
+#14. 
+a = c(1,2,NA,4,NA,6,7)
+print(a,na.print="-999")
+#The NA change to -999 
+
+#15. 
+name = readline(prompt="Input your name: ") 
+age = readline(prompt="Input your age: ") 
+print(paste("My name is",name, "and I am",age ,"years old.")) 
+print(R.version.string)
