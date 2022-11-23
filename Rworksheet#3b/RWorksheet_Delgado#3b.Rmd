@@ -1,0 +1,110 @@
+---
+title: "Rworksheet_Delgado#3b"
+output: pdf_document
+date: "2022-11-21"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+\hfill\break
+Worksheet-3b in R
+Worksheet for R Programming
+
+\hfill\break
+1. Create a data frame using the table below.
+a. Write the codes.
+
+\hfill\break
+```{r, error=TRUE}
+
+Table <- data.frame(
+            respondents = c(1:20),
+            sex = c(2,2,1,2,2,2,2,2,2,2,1,2,2,2,2,2,2,2,1,2),
+            fathers = c(1,3,3,3,1,2,3,1,1,1,3,2,1,3,3,1,3,1,2,1),
+            persons = c(5,7,3,8,5,9,6,7,8,4,7,5,4,7,8,8,3,11,7,6),
+            siblings = c(6,4,4,1,2,1,5,3,1,2,3,2,5,5,2,1,2,5,3,2),
+            types = c(1,2,3,1,1,3,3,1,2,3,2,3,2,2,3,3,3,3,3,2)
+                     )
+Table
+names(Table) <- c("Respondets","Sex", "Fathers Occupation", "Persons at Home","Siblings at School", "Types of Houses" )
+Table
+```
+
+\hfill\break
+b. Describe the data - The data shows the personal information of the respondents according to their gender, occupations, persons at home, siblings at school, and types of houses.
+Get the structure or the summary of the data
+
+```{r, }
+summary(Table)
+```
+\hfill\break
+c. Is the mean number of siblings attending is 5? No
+```{r, error = TRUE}
+mean(Table$`Siblings at School`)
+```
+\hfill\break
+d. Extract the 1st two rows and then all the columns using the subsetting functions.
+Write the codes and its output.
+```{r, error = TRUE}
+extract_subset1 <- subset(Table[1:2,1:6])
+extract_subset1
+```
+\hfill\break
+e. Extract 3rd and 5th row with 2nd and 4th column. Write the codes and it result.
+```{r, error = TRUE}
+extract_subset2 <- subset(Table[c(3,5), c(2,4)])
+extract_subset2
+```
+\hfill\break
+f. Select the variable types of houses then store the vector that results as types_houses.
+Write the codes.
+```{r, error = TRUE}
+types_house <- Table$`Types of Houses`
+types_house
+```
+\hfill\break
+g. Select only all Males respondent that their father occupation was farmer. 
+Write the codes and its output. The output is: The data frame with 0 columns and 3 rows
+
+```{r, error = TRUE}
+
+Male_respondents <- subset(Table, Sex == '1', 'Fathers Occupation' == '1')
+Male_respondents
+
+```
+
+\hfill\break
+h. Select only all females respondent that have greater than or equal to 5 number of siblings attending school.
+Write the codes and its outputs.
+```{r, error = TRUE}
+occupation1 <- subset(Table[c(1:20), c(2,5)])
+occupation1
+
+female_respondents <- occupation1[Table$`Siblings at School` >= '5',]
+female_respondents
+```
+\hfill\break
+2. Write a R program to create an empty data frame. Using the following codes:
+```{r, error=TRUE}  
+  df = data.frame(Ints=integer(),
+                  Doubles=double(), Characters=character(),
+                  Logicals=logical(),
+                  Factors=factor(),
+                  stringsAsFactors=FALSE)
+print("Structure of the empty dataframe:")
+print(str(df))
+```
+a. Describe the results.
+
+The Data frame show that No data available in table. Its shows that there is no value data in table. Only the names of the Ints,characters ... are there.
+\hfill\break
+3. Interpret the graph.
+
+Sentiments of Tweets per day of Donald Trump. Its all about the negative, neutral and positive tweets of Donald Trump per day. We can see that some of the tweets are more negative than positive.
+
+
+
+
+
