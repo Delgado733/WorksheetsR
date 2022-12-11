@@ -1,0 +1,159 @@
+---
+title: "Project#2"
+author: "JR Delgado"
+date: "2022-12-11"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+Project 2
+
+Extract 10000 tweets from Twitter using twitteR package including retweets.
+
+Subset the retweets and the original tweets into a separate file
+
+Plot the retweets and the original tweets using bar graph in vertical manner.
+
+Include legends
+
+
+Extract 10000 tweets from Twitter using twitteR package including retweets.
+
+```{r, error=TRUE}
+
+library(wordcloud)
+library(plotly)
+library(tm)
+library(dplyr)
+library(RColorBrewer)
+library(ggplot2)
+library(twitteR)
+```
+
+SET-UP CREDENTIALS
+```{r, error=TRUE}
+CONSUMER_SECRET <- "laGMDCfJUSOReAgyw0Wbpxsw5mgbzb8lqo7cC2WU6tB4vrCrpB"
+CONSUMER_KEY <- "3vdJJj4emRTPkNuNrp8dStj49"
+ACCESS_SECRET <- "RNH4qsyvtRawmwH11qUargkQCKxf5tjvbsmZEQlYsF5Ud"
+ACCESS_TOKEN <- "1592858497888444417-3jUbZnrov2hNroXf5KGV1M5rxIQIL0"
+```
+
+CONNECT TO TWITTER APP
+```{r, error=TRUE}
+setup_twitter_oauth(consumer_secret = CONSUMER_SECRET,
+                    consumer_key = CONSUMER_KEY,
+                    access_secret = ACCESS_SECRET,
+                    access_token = ACCESS_TOKEN
+)
+```
+
+Get 10000 observations "excluding retweets.
+```{r, error=TRUE}
+trendTweets <- searchTwitter("Philippines", 
+                             n = 10000,
+                             lang = "en",
+                             since = "2022-11-24",
+                             until = "2022-12-30",
+                             retryOnRateLimit=120)
+```
+
+twitter list to data frame
+```{r, error=TRUE}
+philippinesDF <- twListToDF(trendTweets)
+```
+
+Save and Load Data frame files
+```{r, error=TRUE}
+save(philippinesDF, file = "philippinesDF.Rdata")
+load(file = "philippinesDF.Rdata")
+```
+
+Checking for missing values in data frame
+```{r, error=TRUE}
+saple_data <- sapply(philippinesDF, function(x) sum(is.na(x)))
+
+```
+
+Tweets
+
+Subsetting using the dplyr() PACKAGE.
+```{r, error=TRUE}
+philippines_tweets <- philippinesDF %>%
+  select(screenName,text,created, isRetweet) %>% filter(isRetweet == FALSE)
+save(philippines_tweets, file = "philippines_tweetsF.Rdata")
+load(file = "philippines_tweets.Rdata")
+```
+Grouping the data created. 
+```{r, error=TRUE}
+philippines_tweets %>%  
+  group_by(1) %>%  
+  summarise(max = max(created), min = min(created))
+```
+
+```{r, error=TRUE}
+
+philippines_data <- philippines_tweets %>%  mutate(Created_At_Round = created %>% round(units = 'hours') %>% as.POSIXct())
+
+```
+
+```{r, error=TRUE}
+mn <- philippines_tweets %>% pull(created) %>% min()
+ 
+mx <- philippines_tweets %>% pull(created) %>% max()
+
+```
+
+ Plot tweets using the library(plotly) and ggplot().
+```{r, error=TRUE}
+philData_plotting <- ggplot(philippines_data, aes(x = Created_At_Round)) +
+  geom_histogram(aes(fill = ..count..)) +
+  theme(legend.position = "right") +
+  xlab("Time") + ylab("Number of tweets") + 
+  scale_fill_gradient(low = "midnightblue", high = "aquamarine4")
+
+philData_plotting %>% ggplotly()
+```
+
+
+Retweets
+```{r, error=TRUE}
+philippines_tweets2 <- philippinesDF %>%
+  select(screenName,text,created, isRetweet) %>% filter(isRetweet == TRUE)
+
+```
+
+Grouping the data created
+```{r, error=TRUE}
+philippines_tweets2 %>%  
+  group_by(1) %>%  
+  summarise(max = max(created), min = min(created))
+```
+
+```{r, error=TRUE}
+philippines_data2 <- philippines_tweets2 %>%  mutate(Created_At_Round = created %>% round(units = 'hours') %>% as.POSIXct())
+
+```
+
+```{r, error=TRUE}
+mn <- philippines_tweets2 %>% pull(created) %>% min()
+ 
+mx <- philippines_tweets2 %>% pull(created) %>% max()
+
+```
+
+Plot retweets using the library(plotly) and ggplot().
+ 
+```{r, error=TRUE}
+philData_plotting2 <- ggplot(philippines_data2, aes(x = Created_At_Round)) +
+  geom_histogram(aes(fill = ..count..)) +
+  theme(legend.position = "right") +
+  xlab("Time") + ylab("Number of tweets") + 
+  scale_fill_gradient(low = "midnightblue", high = "aquamarine4")
+
+philData_plotting2 %>% ggplotly()
+```
+
+
